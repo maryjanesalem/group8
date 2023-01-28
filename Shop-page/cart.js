@@ -70,6 +70,7 @@ function addCartClicked(event) {
     var itemImg = shopItems.getElementsByClassName("item-img")[0].src;
     addItemToCart(title, price, itemImg);
     updatetotal();
+
 }
 
 function addItemToCart(title, price, itemImg) {
