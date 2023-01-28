@@ -220,10 +220,20 @@ register.addEventListener(
     validatePassword();
     validateConfirmPassword();
 
+    // JSON, Local Storage
+    const user = {
+      username: username.value,
+      password: password.value,
+      email: email.value,
+    }
+
+    const json = JSON.stringify(user);
+
     if (!usernameBool || !emailBool || !passwordBool || !confirmPasswordBool) {
       return;
     } else {
       hideSignupModal();
+      localStorage.setItem("user", json);
       success.style.display = "block";
       register.reset();
       login.reset();
@@ -239,21 +249,26 @@ const loginUsername = document.querySelector('#loginUsername');
 const loginUsernameError = document.querySelector('#loginUsernameError');
 const loginPassword = document.querySelector('#loginPassword');
 const loginPasswordError = document.querySelector('#loginPasswordError');
+const data =  JSON.parse( localStorage.getItem("user") );
+
 
 let loginUserBool;
 let loginPassBool;
 
 // Functions
 const validateLoginUsername = () => {
+
   const userLoginValue = loginUsername.value.trim();
   loginUsernameError.innerText = "";
   if (!userLoginValue) {
     loginUsernameError.innerText = 'Username is required';
     loginUserBool = false;
   }
-  else if (userLoginValue.length < 8 || userLoginValue.length > 16) {
-    loginUsernameError.innerText = 'Invalid Username';
+  else if (userLoginValue !== data.username) {
+    loginUsernameError.innerText = 'Wrong Username';
     loginUserBool = false;
+  } else if (userLoginValue === data.username) {
+    loginUserBool = true;
   } else {
     loginUserBool = true;
   }
@@ -261,17 +276,19 @@ const validateLoginUsername = () => {
 
 const validateLoginPassword = () => {
   const passwordLoginValue = loginPassword.value;
-  const passwordLoginValidator = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
   loginPasswordError.innerText = "";
 
   if (!passwordLoginValue) {
     loginPasswordError.innerText = "Password is required";
     loginPassBool = false;
   }
-  else if (!passwordLoginValidator.test(passwordLoginValue)) {
-    loginPasswordError.innerText = "Invalid Password";
+  else if (passwordLoginValue !== data.password) {
+    loginPasswordError.innerText = "Wrong Password";
     loginPassBool = false;
-  } else {
+  } else if (passwordLoginValue === data.password) {
+    loginPassBool = true;
+  }
+  else {
     loginPassBool = true;
   }
 }
@@ -281,6 +298,7 @@ login.addEventListener(
   'submit',
   (e) => {
     e.preventDefault();
+
     validateLoginUsername();
     validateLoginPassword();
 
@@ -292,6 +310,8 @@ login.addEventListener(
       hideLoginModal();
       login.reset();
     }
+
+    console.log 
   }
 )
 
