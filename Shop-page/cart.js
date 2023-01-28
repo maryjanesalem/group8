@@ -90,7 +90,7 @@ var cartBoxContent = `
                       <img src="${itemImg}" alt="" class="cart-img">
                         <div class="detail-box">
                             <div class="cart-product-title">${title}</div>
-                            <div class="cart-price">${price}}</div>
+                            <div class="cart-price">${price}</div>
                             <input type="number" value="1" class="cart-quantity">
                         </div>
                         <!-- Remove Cart -->
@@ -109,6 +109,9 @@ cartShopBox.getElementsByClassName("cart-quantity")[0]
 const modalCheckout = document.querySelector('#modalCheckout');
 const totalPrice = document.querySelector('.total-price');
 const finalTotal = document.querySelector('#finalTotal');
+
+
+
 
 // Update Total
 function updatetotal() {
@@ -131,7 +134,7 @@ var total = 0;
         total = Math.round(total * 100) / 100 + 1.5;
 
         document.getElementsByClassName("total-price")[0].innerText = "$" + total;
-        document.getElementsByClassName("total-price").value = total;
+        totalPrice.value = total;
 
 
         // totalPrice.value = total;
@@ -144,37 +147,22 @@ var total = 0;
 
 // Buy Button
 function buyButtonClicked() {
-    // new
-    // const modalCheckout = document.querySelector('#modalCheckout');
-    // const finalTotal = document.querySelector('#finalTotal');
-    // const totalPrice = document.querySelector('.total-price');
-    
-
 
     // alert ("your Order is placed");
-
     
-    var cartContent = document.getElementsByClassName("cart-content")[0];
-    while (cartContent.hasChildNodes()) {
-        cartContent.removeChild(cartContent.firstChild);
-    }
+    // var cartContent = document.getElementsByClassName("cart-content")[0];
+    // while (cartContent.hasChildNodes()) {
+    //     cartContent.removeChild(cartContent.firstChild);
+    // }
     updatetotal();
 
-    // new
-
-    // finalTotal.value = totalPrice.value;
-    // finalTotal.innerText = totalPrice.value;
 
     modalCheckout.style.display = 'block';
-
 }
 
 
 
 
 // close modal
-
-// const modalCheckout = document.querySelector('#modalCheckout');
-
 modalCheckout.addEventListener('click', () => modalCheckout.style.display = 'none');
 
