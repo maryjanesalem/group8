@@ -249,7 +249,7 @@ const loginUsername = document.querySelector('#loginUsername');
 const loginUsernameError = document.querySelector('#loginUsernameError');
 const loginPassword = document.querySelector('#loginPassword');
 const loginPasswordError = document.querySelector('#loginPasswordError');
-const data =  JSON.parse( localStorage.getItem("user") );
+const data = JSON.parse( localStorage.getItem("user") );
 
 
 let loginUserBool;

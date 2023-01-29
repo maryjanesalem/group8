@@ -506,6 +506,7 @@ header {
 
   .modal-checkout .total-string {
     pointer-events: none;
+    font-size: xx-large;
   }
 
   .modal-checkout button {
@@ -516,10 +517,6 @@ header {
   .modal-checkout p {
     margin: 0 20px;
     text-align: center;
-  }
-
-  .modal-checkout .total-string {
-    font-size: xx-large;
   }
 
   .modal-checkout .close-modal {
