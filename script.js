@@ -250,6 +250,8 @@ const loginUsernameError = document.querySelector('#loginUsernameError');
 const loginPassword = document.querySelector('#loginPassword');
 const loginPasswordError = document.querySelector('#loginPasswordError');
 const data = JSON.parse( localStorage.getItem("user") );
+const passwordLoginValidator = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+
 
 
 let loginUserBool;
@@ -265,7 +267,7 @@ const validateLoginUsername = () => {
     loginUserBool = false;
   }
   else if (userLoginValue !== data.username) {
-    loginUsernameError.innerText = 'Wrong Username';
+    loginUsernameError.innerText = 'Username not recognised';
     loginUserBool = false;
   } else if (userLoginValue === data.username) {
     loginUserBool = true;
@@ -282,10 +284,15 @@ const validateLoginPassword = () => {
     loginPasswordError.innerText = "Password is required";
     loginPassBool = false;
   }
-  else if (passwordLoginValue !== data.password) {
-    loginPasswordError.innerText = "Wrong Password";
+  else if (!passwordLoginValidator.test(passwordLoginValue)) {
+    loginPasswordError.innerText = "Invalid Password";
     loginPassBool = false;
-  } else if (passwordLoginValue === data.password) {
+  }
+  else if (passwordLoginValue !== data.password) {
+    loginPasswordError.innerText = "Incorrect Password";
+    loginPassBool = false;
+  }   
+  else if (passwordLoginValue === data.password) {
     loginPassBool = true;
   }
   else {
